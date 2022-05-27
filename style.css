@@ -1,0 +1,201 @@
+/* Variables de couleur */
+:root {
+    --background: #121416;
+    --background-accent: #1a1c20;
+    --background-lighter: #2b2e35;
+    --text-positive: #36b250;
+    --text-negative: #d3183d;
+    --text-faded: #818181;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
+body {
+    height: 80vh;
+    width: 80vw;
+    font-family: Arial, Helvetica, sans-serif;
+    color: whitesmoke;
+    background-color: var(--background);
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+}
+
+header,
+footer {
+    height: 10%;
+    width: 100%;
+    background-color: var(--background-accent);
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    margin: 30px;
+    height: 50%;
+}
+
+header h1 {
+    font-size: 1.5em;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+main {
+    padding: 30px;
+    width: calc(100% - 60px);
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Coloration des montants négatifs et positifs */
+.positive {
+    color: var(--text-positive);
+}
+.negative {
+    color: var(--text-negative);
+}
+
+/* Design général des input et boutons */
+input {
+    padding: 5px 10px;
+    font-size: 1.2em;
+    background-color: var(--background-accent);
+    border: none;
+    color: whitesmoke;
+}
+
+button {
+    border: none;
+    padding: 7px 12px;
+    background-color: var(--text-positive);
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+/* Formulaire de connexion */
+.connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    gap: 1em;
+}
+
+/* Section de gauche */
+.account {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Style du solde */
+.solde-amount {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+/* Design des formulaires */
+.account form {
+    border-top: 2px solid var(--background-accent);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    gap: 1em;
+}
+.account form label {
+    color: var(--text-faded);
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+.account form button {
+    width: 40%;
+}
+.account form p {
+    height: 20px;
+}
+
+/* Ligne sépératrice entre les deux sections */
+#separator {
+    background-color: var(--background-accent);
+    width: 2px;
+}
+
+/* Section historique */
+.historique {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.historique h2 {
+    height: 5%;
+}
+.historique-list {
+    background-color: var(--background-accent);
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+}
+.historique-item {
+    border-top: var(--background-lighter) 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    align-items: center;
+    padding: 10px;
+}
+
+.historique-item div:first-child {
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    background-color: var(--background-lighter);
+    display: flex;
+}
+.historique-item i {
+    margin: auto;
+    color: var(--text-faded);
+}
+.historique-item div:last-child {
+    margin-left: auto;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.historique-item div:nth-child(2) p:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.historique-item div:nth-child(2) p:last-child {
+    color: var(--text-faded);
+    font-size: 0.8em;
+}
