@@ -27,87 +27,19 @@
 
         <!-- main -->
         <main>
-            <section class="account">
-                <!-- Solde -->
-                <div class="solde">
-                    <h2>Solde du compte</h2>
-                    <p class="solde-amount">
-                        <!-- Montant du solde du compte -->
-                    </p>
-                </div>
-
-                <!-- Depot -->
-                <form class="form-depot">
-                    <h2>Effectuer un dépôt</h2>
-                    <label for="inputDepot">Montant du dépôt</label>
-                    <div>
-                        <input
-                            type="number"
-                            id="inputDepot"
-                            name="depot"
-                            required
-                        />
-                        <select name="question" id="selectQuestion">
-                            <option value="EUR">€</option>
-                            <option value="USD">$</option>
-                        </select>
-                    </div>
-                    <button type="submit" id="btn-depot">DEPOSER</button>
-                    <p class="alert-depot"></p>
-                </form>
-
-                <!-- Retrait -->
-                <form class="form-retrait">
-                    <h2>Effectuer un retrait</h2>
-                    <label for="inputRetrait">Montant du retrait</label>
-                    <div>
-                        <input
-                            type="number"
-                            id="inputRetrait"
-                            name="retrait"
-                            required
-                        />
-                        <select name="question" id="selectQuestion">
-                            <option value="EUR">€</option>
-                            <option value="USD">$</option>
-                        </select>
-                    </div>
-                    <button type="submit" id="btn-retrait">RETIRER</button>
-                    <p class="alert-retrait"></p>
-                </form>
-            </section>
-
-            <div id="separator"></div>
-
-            <section class="historique">
-                <h2>Historique des transactions</h2>
-
-                <div class="historique-list">
-                    <!-- Insertion des transactions -->
-
-                    <div class="historique-item depot">
-                        <div><i class="fa-solid fa-caret-right"></i></div>
-                        <div>
-                            <p>Dépot</p>
-                            <p class="date">27 mai 2022 à 15:00</p>
-                        </div>
-                        <div>
-                            <p class="value positive">+ 1200€</p>
-                        </div>
-                    </div>
-
-                    <div class="historique-item retrait">
-                        <div><i class="fa-solid fa-caret-left"></i></div>
-                        <div>
-                            <p>Retrait</p>
-                            <p class="date">27 mai 2022 à 15:00</p>
-                        </div>
-                        <div>
-                            <p class="value negative">- 2500€</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <!-- Connexion -->
+            <form class="connexion">
+                <h2>Bienvenue, connectez vous à votre compte !</h2>
+                <label for="inputAccount">Numéro de compte</label>
+                <input
+                    type="number"
+                    id="inputAccount"
+                    name="account"
+                    required
+                />
+                <button type="submit" id="btn-account">VALIDER</button>
+                <p class="alert-account"></p>
+            </form>
         </main>
 
         <!-- footer -->

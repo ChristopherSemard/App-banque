@@ -36,14 +36,26 @@ function effectuerDepot(event) {
     inputValueDepot = document.querySelector("#inputDepot");
     // Transformation de la valeur de l'input en nombre grâce à parseInt()
     valueDepot = parseInt(inputValueDepot.value);
-    // Actualisation du solde du compte en ajoutant le dépot au solde existant
-    compte["solde"] = compte["solde"] + valueDepot;
-    // Actualisation du nom et du solde sur la page HTML
-    actualiserCompte();
-    // On remet la value de l'input vide pour réinitialiser le champ
-    inputValueDepot.value = "";
-    // Appeler la fonction pour insérer le depot dans l'historique en passant l'information que c'est un depot
-    insererHistorique("depot", valueDepot);
+    // Récupération de l'endroit où placer le message d'erreur/validation
+    let alertDepot = document.querySelector(".alert-depot");
+
+    // Si la valeur est valide
+    if (checkValidInput(inputValueDepot.value, alertDepot)) {
+        // On effectue le dépot
+        // Actualisation du solde du compte en ajoutant le dépot au solde existant
+        compte["solde"] += valueDepot;
+        // Message de validation
+        alertDepot.textContent = "Depot effectué !";
+        // Ajout de la classe positive pour mettre le texte en vert
+        alertDepot.classList.remove("negative");
+        alertDepot.classList.add("positive");
+        // Actualisation du nom et du solde sur la page HTML
+        actualiserCompte();
+        // On remet la value de l'input vide pour réinitialiser le champ
+        inputValueDepot.value = "";
+        // Appeler la fonction pour insérer le depot dans l'historique en passant l'information que c'est un depot
+        insererHistorique("depot", valueDepot);
+    }
 }
 
 // Ecouteur d'evenement sur le bouton du formulaire de dépôt
@@ -63,27 +75,33 @@ function effectuerRetrait() {
     valueRetrait = parseInt(inputValueRetrait.value);
     // Récupération de l'endroit où placer le message d'erreur/validation
     let alertRetrait = document.querySelector(".alert-retrait");
-    // Si la valeur du retrait est plus grande que le solde actuel
-    if (valueRetrait > compte["solde"]) {
-        // Message d'erreur négatif
-        alertRetrait.textContent = "Vous n'avez pas assez d'argent";
-        // Ajout de la classe negative pour mettre le texte en rouge
-        alertRetrait.classList.add("negative");
-    }
-    // Sinon on effectue le retrait
-    else {
-        // Actualisation du solde du compte en retirant le retrait au solde existant
-        compte["solde"] = compte["solde"] - valueRetrait;
-        // Message de validation
-        alertRetrait.textContent = "Retrait effectué !";
-        // Ajout de la classe positive pour mettre le texte en vert
-        alertRetrait.classList.add("positive");
-        // Actualisation du nom et du solde sur la page HTML
-        actualiserCompte();
-        // On remet la value de l'input vide pour réinitialiser le champ
-        inputValueRetrait.value = "";
-        // Appeler la fonction pour insérer le retrait dans l'historique en passant l'information que c'est un retrait
-        insererHistorique("retrait", valueRetrait);
+
+    // Si la valeur est invalide
+    if (checkValidInput(inputValueRetrait.value, alertRetrait)) {
+        // Si la valeur du retrait est plus grande que le solde actuel
+        if (valueRetrait > compte["solde"]) {
+            // Message d'erreur négatif
+            alertRetrait.textContent = "Vous n'avez pas assez d'argent";
+            // Ajout de la classe negative pour mettre le texte en rouge
+            alertRetrait.classList.remove("positive");
+            alertRetrait.classList.add("negative");
+        }
+        // Sinon on effectue le retrait
+        else {
+            // Actualisation du solde du compte en retirant le retrait au solde existant
+            compte["solde"] -= valueRetrait;
+            // Message de validation
+            alertRetrait.textContent = "Retrait effectué !";
+            // Ajout de la classe positive pour mettre le texte en vert
+            alertRetrait.classList.remove("negative");
+            alertRetrait.classList.add("positive");
+            // Actualisation du nom et du solde sur la page HTML
+            actualiserCompte();
+            // On remet la value de l'input vide pour réinitialiser le champ
+            inputValueRetrait.value = "";
+            // Appeler la fonction pour insérer le retrait dans l'historique en passant l'information que c'est un retrait
+            insererHistorique("retrait", valueRetrait);
+        }
     }
 }
 
@@ -111,4 +129,17 @@ function insererHistorique(type, value) {
     let historiqueListe = document.querySelector(".historique-list");
     // Importation du clone enfant dans la div parente
     historiqueListe.appendChild(clone);
+}
+
+function checkValidInput(value, input) {
+    if (value < 1 || value == "") {
+        // Message d'erreur négatif
+        input.textContent = "Montant saisi invalide";
+        // Ajout de la classe negative pour mettre le texte en rouge
+        input.classList.remove("positive");
+        input.classList.add("negative");
+        return false;
+    } else {
+        return true;
+    }
 }
