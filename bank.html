@@ -37,7 +37,7 @@
                 </div>
 
                 <!-- Depot -->
-                <form class="form-depot">
+                <form class="form-depot" method="POST">
                     <h2>Effectuer un dépôt</h2>
                     <label for="inputDepot">Montant du dépôt</label>
                     <div>
@@ -47,7 +47,7 @@
                             name="depot"
                             required
                         />
-                        <select name="question" id="selectQuestion">
+                        <select name="devise" id="selectDeviseDepot">
                             <option value="EUR">€</option>
                             <option value="USD">$</option>
                         </select>
@@ -57,7 +57,7 @@
                 </form>
 
                 <!-- Retrait -->
-                <form class="form-retrait">
+                <form class="form-retrait" method="POST">
                     <h2>Effectuer un retrait</h2>
                     <label for="inputRetrait">Montant du retrait</label>
                     <div>
@@ -67,7 +67,7 @@
                             name="retrait"
                             required
                         />
-                        <select name="question" id="selectQuestion">
+                        <select name="devise" id="selectDeviseRetrait">
                             <option value="EUR">€</option>
                             <option value="USD">$</option>
                         </select>
