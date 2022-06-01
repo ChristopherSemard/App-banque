@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BANK</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="./assets/images/logo.png" />
+        <script
+            src="https://kit.fontawesome.com/c52cbb9b58.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+
+    <body>
+        <!-- header -->
+        <header>
+            <img src="./assets/images/logo.png" alt="Logo banque" />
+            <h1>
+                Bienvenue
+                <span id="account-name">
+                    <!-- Nom du titulaire du compte -->
+                </span>
+            </h1>
+        </header>
+
+        <!-- main -->
+        <main>
+            <!-- Connexion -->
+            <form class="connexion">
+                <h2>Bienvenue, connectez vous à votre compte !</h2>
+                <label for="inputAccount">Numéro de compte</label>
+                <input
+                    type="number"
+                    id="inputAccount"
+                    name="account"
+                    required
+                />
+                <button type="submit" id="btn-account">VALIDER</button>
+                <p class="alert-account"></p>
+            </form>
+        </main>
+
+        <!-- footer -->
+        <footer>
+            <p id="feedback"></p>
+        </footer>
+
+        <!-- Templates utilisés pour l'historique des transactions -->
+        <template id="depot">
+            <div class="historique-item depot">
+                <div>
+                    <i class="fa-solid fa-caret-right"></i>
+                </div>
+                <div>
+                    <p>Dépot</p>
+                    <p class="date"></p>
+                </div>
+                <div>
+                    <p class="value positive"></p>
+                </div>
+            </div>
+        </template>
+
+        <template id="retrait">
+            <div class="historique-item retrait">
+                <div>
+                    <i class="fa-solid fa-caret-left"></i>
+                </div>
+                <div>
+                    <p>Retrait</p>
+                    <p class="date"></p>
+                </div>
+                <div>
+                    <p class="value negative"></p>
+                </div>
+            </div>
+        </template>
+
+        <!-- Script JS -->
+        <script src="app.js"></script>
+    </body>
+</html>

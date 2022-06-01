@@ -26,6 +26,12 @@ btnDepot = document.querySelector("#btn-depot");
 btnDepot.addEventListener("click", (event) => {
     // Empêcher la validation du formulaire d'actualiser la page
     event.preventDefault();
+    // Appel de la fonction pour effectuer le dépot
+    effectuerDepot();
+});
+
+// Effectuer le depot
+function effectuerDepot(event) {
     // Récupération de l'input du formulaire
     inputValueDepot = document.querySelector("#inputDepot");
     // Transformation de la valeur de l'input en nombre grâce à parseInt()
@@ -38,13 +44,19 @@ btnDepot.addEventListener("click", (event) => {
     inputValueDepot.value = "";
     // Appeler la fonction pour insérer le depot dans l'historique en passant l'information que c'est un depot
     insererHistorique("depot", valueDepot);
-});
+}
 
 // Ecouteur d'evenement sur le bouton du formulaire de dépôt
 btnRetrait = document.querySelector("#btn-retrait");
 btnRetrait.addEventListener("click", (event) => {
     // Empêcher la validation du formulaire d'actualiser la page
     event.preventDefault();
+    // Appel de la fonction pour effectuer le retrait
+    effectuerRetrait();
+});
+
+// Effectuer le retrait
+function effectuerRetrait() {
     // Récupération de la valeur de l'input du formulaire
     inputValueRetrait = document.querySelector("#inputRetrait");
     // Transformation de la valeur de l'input en nombre grâce à parseInt()
@@ -73,7 +85,7 @@ btnRetrait.addEventListener("click", (event) => {
         // Appeler la fonction pour insérer le retrait dans l'historique en passant l'information que c'est un retrait
         insererHistorique("retrait", valueRetrait);
     }
-});
+}
 
 // Insertion de l'opération dans l'historique en fonction du type d'opération reçue
 function insererHistorique(type, value) {
