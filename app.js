@@ -138,12 +138,13 @@ async function effectuerRetrait() {
         // Sinon on effectue le retrait
         else {
             // Récupérer la devise selectionnée dans le select du formulaire
-            let selectedDevise =
-                document.querySelector("#selectDeviseDepot").value;
+            let selectedDevise = document.querySelector(
+                "#selectDeviseRetrait"
+            ).value;
             // Si la devise selectionnée n'est pas l'Euro
             if (selectedDevise.value != "EUR") {
                 // On redéfinit notre valeur de dépot par la version convertie en euros grâce à notre fonction convertValue(valueDepot, selectedDevise)
-                valueDepot = await convertValue(valueDepot, selectedDevise);
+                valueRetrait = await convertValue(valueRetrait, selectedDevise);
             }
             // Actualisation du solde du compte en retirant le retrait au solde existant
             compte["solde"] -= valueRetrait;
@@ -179,7 +180,9 @@ function insererHistorique(type, value) {
     // Importation du clone dans le DOM avec le contenu du template sans qu'il n'apparaisse nulle part pour le moment
     let clone = document.importNode(template.content, true);
     // Modification du clone avec les informations qu'on veut lui donner
-    clone.querySelector(".date").textContent = new Date().toDateString();
+    clone.querySelector(".date").textContent = new Date().toLocaleString(
+        "fr-FR"
+    );
     clone.querySelector(".value").textContent = value + " €";
 
     // Récupération de la div parente où importer le clone
@@ -201,7 +204,7 @@ function checkValidInput(value, input) {
     }
 }
 
-// Fonction pour convertir notre valeur dans la devise selectionnée
+// Fonction pour convertir notre valeur dans la devise selectionnée, elle attend la valeur à convertir et la devise
 async function convertValue(value, devise) {
     // HEADERS ET OPTIONS DU FETCH !!! Trop compliqué pour l'instant
     let myHeaders = new Headers();
