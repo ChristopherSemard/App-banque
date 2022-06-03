@@ -26,6 +26,7 @@ btnAccount.addEventListener("click", (event) => {
     connection();
 });
 
+// Fonction de connexion
 function connection() {
     // Récupération de l'input du formulaire
     inputValueAccount = document.querySelector("#inputAccount").value;
@@ -42,7 +43,7 @@ function connection() {
     }
     // Si le compte existe
     else {
-        // Redirection vers la page bank.html en insérant le parametre ?account= + valeur de l'input
+        // Redirection vers la page bank.html en insérant le parametre ?account= + valeur de l'input pour pouvoir passer l'info du compte à utiliser lors de la page suivante
         document.location.href = "./bank.html?account=" + inputValueAccount;
     }
 }
