@@ -73,7 +73,7 @@ btnDepot.addEventListener("click", (event) => {
     effectuerDepot();
 });
 
-// Effectuer le depot
+// Effectuer le depot (ajout du async devant le function pour pouvoir utiliser le await lors de la récupération de la valeur convertie grâce à l'API)
 async function effectuerDepot(event) {
     // Récupération de l'input du formulaire
     let inputValueDepot = document.querySelector("#inputDepot");
@@ -85,13 +85,11 @@ async function effectuerDepot(event) {
     // Si la valeur est valide
     if (checkValidInput(inputValueDepot.value, alertDepot)) {
         // Récupérer la devise selectionnée dans le select du formulaire
-        const selectedDevise =
-            document.querySelector("#selectDeviseDepot").value;
-        console.log(selectedDevise);
+        let selectedDevise = document.querySelector("#selectDeviseDepot").value;
+        // Si la devise selectionnée n'est pas l'Euro
         if (selectedDevise != "EUR") {
+            // On redéfinit notre valeur de dépot par la version convertie en euros grâce à notre fonction convertValue(valueDepot, selectedDevise)
             valueDepot = await convertValue(valueDepot, selectedDevise);
-            console.log(valueDepot);
-            console.log(typeof valueDepot);
         }
         // Actualisation du solde du compte en ajoutant le dépot au solde existant
         compte["solde"] += valueDepot;
@@ -104,7 +102,7 @@ async function effectuerDepot(event) {
         actualiserCompte();
         // On remet la value de l'input vide pour réinitialiser le champ
         inputValueDepot.value = "";
-        // Appeler la fonction pour insérer le depot dans l'historique en passant l'information que c'est un depot
+        // Appeler la fonction pour insérer le depot dans l'historique en passant l'information que c'est un depot et la valeur du dépot
         insererHistorique("depot", valueDepot);
     }
 }
@@ -118,8 +116,8 @@ btnRetrait.addEventListener("click", (event) => {
     effectuerRetrait();
 });
 
-// Effectuer le retrait
-function effectuerRetrait() {
+// Effectuer le retrait (ajout du async devant le function pour pouvoir utiliser le await lors de la récupération de la valeur convertie grâce à l'API)
+async function effectuerRetrait() {
     // Récupération de la valeur de l'input du formulaire
     let inputValueRetrait = document.querySelector("#inputRetrait");
     // Transformation de la valeur de l'input en nombre grâce à parseInt()
@@ -139,6 +137,14 @@ function effectuerRetrait() {
         }
         // Sinon on effectue le retrait
         else {
+            // Récupérer la devise selectionnée dans le select du formulaire
+            let selectedDevise =
+                document.querySelector("#selectDeviseDepot").value;
+            // Si la devise selectionnée n'est pas l'Euro
+            if (selectedDevise.value != "EUR") {
+                // On redéfinit notre valeur de dépot par la version convertie en euros grâce à notre fonction convertValue(valueDepot, selectedDevise)
+                valueDepot = await convertValue(valueDepot, selectedDevise);
+            }
             // Actualisation du solde du compte en retirant le retrait au solde existant
             compte["solde"] -= valueRetrait;
             // Message de validation
@@ -150,7 +156,7 @@ function effectuerRetrait() {
             actualiserCompte();
             // On remet la value de l'input vide pour réinitialiser le champ
             inputValueRetrait.value = "";
-            // Appeler la fonction pour insérer le retrait dans l'historique en passant l'information que c'est un retrait
+            // Appeler la fonction pour insérer le depot dans l'historique en passant l'information que c'est un retrait et la valeur du dépot
             insererHistorique("retrait", valueRetrait);
         }
     }
@@ -208,7 +214,7 @@ async function convertValue(value, devise) {
     };
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    // Définition de la valeur convertie à retourner
+    // Définition de la valeur convertie à retourner valueConverted
     let valueConverted;
 
     // Création de la requête API (le AWAIT est nécessaire pour attendre que la requête soit finie avant de passer à la suite des instruction)
@@ -222,12 +228,18 @@ async function convertValue(value, devise) {
         .then(function (response) {
             return response.json();
         })
-        // On récupère les data et
+        // On récupère les data
         .then(function (data) {
+            // On update notre variable valueConverted par le résultat que nous a retourné l'API
             valueConverted = data.result;
         })
+        // On récupère les erreurs au cas où
         .catch(function (error) {
             console.log("error", error);
         });
+
+    // On redéfinit encore notre variable cette fois par la version arrondie de notre valeur
+    valueConverted = Math.round(valueConverted);
+    // Retourner la valeur valueConverted
     return valueConverted;
 }
